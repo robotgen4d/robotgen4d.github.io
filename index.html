@@ -31,7 +31,7 @@
             overflow: hidden;
             border: 2px solid #333;
             cursor: col-resize;
-            aspect-ratio: 32/10;
+            aspect-ratio: 32/11;
             transition: border-color 0.2s ease;
             margin-bottom: 1em;
         }
@@ -121,6 +121,53 @@
         .label-right {
             right: 10px;
         }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            gap: 20px;
+        }
+
+        .nav-arrow {
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow:hover {
+            background: #555;
+            transform: scale(1.1);
+        }
+
+        .nav-arrow:disabled {
+            background: #222;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .video-info {
+            background: rgba(51, 51, 51, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+            font-size: 14px;
+        }
         
         .controls {
             margin-top: 10px;
@@ -158,6 +205,23 @@
         <h2 style="text-align: center; white-space: nowrap; font-size: 200%">
             Geometry-aware 4D Video Generation for Robot Manipulation
         </h2>
+
+        <!-- <div style="text-align: center; margin: 2em 0;">
+            <div style="display: flex; justify-content: center; gap: 60px; max-width: 90%; margin: 0 auto;">
+                <div style="flex: 1; max-width: 600px;">
+                    <video controls autoplay loop muted playsinline style="width: 100%; border: 2px solid #333; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <source src="videos/teaser_1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div style="flex: 1; max-width: 600px;">
+                    <video controls autoplay loop muted playsinline style="width: 100%; border: 2px solid #333; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <source src="videos/teaser_2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div> -->
 
         <p style="color: black;">Understanding and predicting the dynamics of the physical world can enhance a robot's
             ability to plan and interact effectively in complex environments. While recent video generation models have
@@ -201,11 +265,11 @@
             </div>
             <div class="video-compare-container" id="container1">
                 <video class="video-canvas rgb-video" id="rgbVideo1" loop muted preload="metadata" autoplay onloadeddata="setupVideo(1)">
-                    <source src="videos/task_1/gt_rgb.mp4" type="video/mp4">
+                    <source src="videos/task_1/gt_rgb_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <video class="video-canvas depth-video" id="depthVideo1" loop muted preload="metadata" autoplay onloadeddata="setupVideo(1)">
-                    <source src="videos/task_1/gt_depth.mp4" type="video/mp4">
+                    <source src="videos/task_1/gt_depth_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 
@@ -215,6 +279,12 @@
                     <div class="label label-left">RGB</div>
                     <div class="label label-right">DEPTH</div>
                 </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-arrow" id="prevBtn1" onclick="switchVideo1(-1)">←</button>
+                <div class="video-info" id="videoInfo1">Result 1 of 2</div>
+                <button class="nav-arrow" id="nextBtn1" onclick="switchVideo1(1)">→</button>
             </div>
             
             <div class="controls">
@@ -226,11 +296,11 @@
             </div>
             <div class="video-compare-container" id="container2">
                 <video class="video-canvas rgb-video" id="rgbVideo2" loop muted preload="metadata" autoplay onloadeddata="setupVideo(2)">
-                    <source src="videos/task_1/ours/rgb.mp4" type="video/mp4">
+                    <source src="videos/task_1/ours/rgb_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <video class="video-canvas depth-video" id="depthVideo2" loop muted preload="metadata" autoplay onloadeddata="setupVideo(2)">
-                    <source src="videos/task_1/ours/depth.mp4" type="video/mp4">
+                    <source src="videos/task_1/ours/depth_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 
@@ -240,6 +310,12 @@
                     <div class="label label-left">RGB</div>
                     <div class="label label-right">DEPTH</div>
                 </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-arrow" id="prevBtn2" onclick="switchVideo2(-1)">←</button>
+                <div class="video-info" id="videoInfo2">Result 1 of 2</div>
+                <button class="nav-arrow" id="nextBtn2" onclick="switchVideo2(1)">→</button>
             </div>
             
             <div class="controls">
@@ -330,8 +406,6 @@
             </div>
         </div>
 
-        <br>
-
         <h4> (b) PutSpatulaOnTable 👩‍🍳</h4>
         A single robot arm retrieves a spatula from a utensil crock and places it on the left side of the table. This
         task requires precise manipulation to successfully grasp the narrow object.
@@ -343,11 +417,11 @@
             </div>
             <div class="video-compare-container" id="container3">
                 <video class="video-canvas rgb-video" id="rgbVideo3" loop muted preload="metadata" autoplay onloadeddata="setupVideo(3)">
-                    <source src="videos/task_2/gt_rgb.mp4" type="video/mp4">
+                    <source src="videos/task_2/gt_rgb_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <video class="video-canvas depth-video" id="depthVideo3" loop muted preload="metadata" autoplay onloadeddata="setupVideo(3)">
-                    <source src="videos/task_2/gt_depth.mp4" type="video/mp4">
+                    <source src="videos/task_2/gt_depth_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 
@@ -357,6 +431,12 @@
                     <div class="label label-left">RGB</div>
                     <div class="label label-right">DEPTH</div>
                 </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-arrow" id="prevBtn3" onclick="switchVideo3(-1)">←</button>
+                <div class="video-info" id="videoInfo3">Result 1 of 2</div>
+                <button class="nav-arrow" id="nextBtn3" onclick="switchVideo3(1)">→</button>
             </div>
             
             <div class="controls">
@@ -368,11 +448,11 @@
             </div>
             <div class="video-compare-container" id="container4">
                 <video class="video-canvas rgb-video" id="rgbVideo4" loop muted preload="metadata" autoplay onloadeddata="setupVideo(4)">
-                    <source src="videos/task_2/ours/rgb.mp4" type="video/mp4">
+                    <source src="videos/task_2/ours/rgb_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <video class="video-canvas depth-video" id="depthVideo4" loop muted preload="metadata" autoplay onloadeddata="setupVideo(4)">
-                    <source src="videos/task_2/ours/depth.mp4" type="video/mp4">
+                    <source src="videos/task_2/ours/depth_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 
@@ -382,6 +462,12 @@
                     <div class="label label-left">RGB</div>
                     <div class="label label-right">DEPTH</div>
                 </div>
+            </div>
+
+            <div class="navigation">
+                <button class="nav-arrow" id="prevBtn4" onclick="switchVideo4(-1)">←</button>
+                <div class="video-info" id="videoInfo4">Result 1 of 2</div>
+                <button class="nav-arrow" id="nextBtn4" onclick="switchVideo4(1)">→</button>
             </div>
             
             <div class="controls">
@@ -495,11 +581,11 @@
             </div>
             <div class="video-compare-container" id="container5">
                 <video class="video-canvas rgb-video" id="rgbVideo5" loop muted preload="metadata" autoplay onloadeddata="setupVideo(5)">
-                    <source src="videos/task_3/gt_rgb.mp4" type="video/mp4">
+                    <source src="videos/task_3/gt_rgb_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <video class="video-canvas depth-video" id="depthVideo5" loop muted preload="metadata" autoplay onloadeddata="setupVideo(5)">
-                    <source src="videos/task_3/gt_depth.mp4" type="video/mp4">
+                    <source src="videos/task_3/gt_depth_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 
@@ -510,6 +596,12 @@
                     <div class="label label-right">DEPTH</div>
                 </div>
             </div>
+
+            <!-- <div class="navigation">
+                <button class="nav-arrow" id="prevBtn5" onclick="switchVideo5(-1)">←</button>
+                <div class="video-info" id="videoInfo5">Result 1 of 2</div>
+                <button class="nav-arrow" id="nextBtn5" onclick="switchVideo5(1)">→</button>
+            </div> -->
             
             <div class="controls">
                 <button onclick="togglePlayback(5)" id="playButton5">Play</button>
@@ -520,11 +612,11 @@
             </div>
             <div class="video-compare-container" id="container6">
                 <video class="video-canvas rgb-video" id="rgbVideo6" loop muted preload="metadata" autoplay onloadeddata="setupVideo(6)">
-                    <source src="videos/task_3/ours/rgb.mp4" type="video/mp4">
+                    <source src="videos/task_3/ours/rgb_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <video class="video-canvas depth-video" id="depthVideo6" loop muted preload="metadata" autoplay onloadeddata="setupVideo(6)">
-                    <source src="videos/task_3/ours/depth.mp4" type="video/mp4">
+                    <source src="videos/task_3/ours/depth_1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 
@@ -535,6 +627,12 @@
                     <div class="label label-right">DEPTH</div>
                 </div>
             </div>
+
+            <!-- <div class="navigation">
+                <button class="nav-arrow" id="prevBtn6" onclick="switchVideo6(-1)">←</button>
+                <div class="video-info" id="videoInfo6">Result 1 of 2</div>
+                <button class="nav-arrow" id="nextBtn6" onclick="switchVideo6(1)">→</button>
+            </div> -->
             
             <div class="controls">
                 <button onclick="togglePlayback(6)" id="playButton6">Play</button>
@@ -626,6 +724,102 @@
         // Store multiple video comparison instances
         const videoComparisons = {};
         
+        // Video sets for all tasks
+        const videoSets = {
+            task1_gt: [
+                {
+                    rgb: "videos/task_1/gt_rgb_1.mp4",
+                    depth: "videos/task_1/gt_depth_1.mp4",
+                    title: "GT"
+                },
+                {
+                    rgb: "videos/task_1/gt_rgb_2.mp4",
+                    depth: "videos/task_1/gt_depth_2.mp4",
+                    title: "GT"
+                }
+            ],
+            task1_ours: [
+                {
+                    rgb: "videos/task_1/ours/rgb_1.mp4",
+                    depth: "videos/task_1/ours/depth_1.mp4",
+                    title: "Result"
+                },
+                {
+                    rgb: "videos/task_1/ours/rgb_2.mp4",
+                    depth: "videos/task_1/ours/depth_2.mp4",
+                    title: "Result"
+                }
+            ],
+            task2_gt: [
+                {
+                    rgb: "videos/task_2/gt_rgb_1.mp4",
+                    depth: "videos/task_2/gt_depth_1.mp4",
+                    title: "GT"
+                },
+                {
+                    rgb: "videos/task_2/gt_rgb_2.mp4",
+                    depth: "videos/task_2/gt_depth_2.mp4",
+                    title: "GT"
+                }
+            ],
+            task2_ours: [
+                {
+                    rgb: "videos/task_2/ours/rgb_1.mp4",
+                    depth: "videos/task_2/ours/depth_1.mp4",
+                    title: "Result"
+                },
+                {
+                    rgb: "videos/task_2/ours/rgb_2.mp4",
+                    depth: "videos/task_2/ours/depth_2.mp4",
+                    title: "Result"
+                }
+            ],
+            task3_gt: [
+                {
+                    rgb: "videos/task_3/gt_rgb_1.mp4",
+                    depth: "videos/task_3/gt_depth_1.mp4",
+                    title: "GT"
+                },
+                {
+                    rgb: "videos/task_3/gt_rgb_2.mp4",
+                    depth: "videos/task_3/gt_depth_2.mp4",
+                    title: "GT"
+                }
+            ],
+            task3_ours: [
+                {
+                    rgb: "videos/task_3/ours/rgb_1.mp4",
+                    depth: "videos/task_3/ours/depth_1.mp4",
+                    title: "Result"
+                },
+                {
+                    rgb: "videos/task_3/ours/rgb_2.mp4",
+                    depth: "videos/task_3/ours/depth_2.mp4",
+                    title: "Result"
+                }
+            ]
+        };
+        
+        // Track current video index for each container
+        const currentVideoIndexes = {
+            1: 0, // task1_gt
+            2: 0, // task1_ours
+            3: 0, // task2_gt
+            4: 0, // task2_ours
+            5: 0, // task3_gt
+            6: 0  // task3_ours
+        };
+        
+        // Map container IDs to video sets
+        const containerToVideoSet = {
+            1: 'task1_gt',
+            2: 'task1_ours',
+            3: 'task2_gt',
+            4: 'task2_ours',
+            5: 'task3_gt',
+            6: 'task3_ours'
+        };
+        
         function setupVideo(instanceId) {
             if (!videoComparisons[instanceId]) {
                 videoComparisons[instanceId] = {
@@ -690,6 +884,11 @@
 
             setupDragHandlers(instanceId);
             updatePlayButton(instanceId);
+            
+            // Initialize navigation for containers with navigation
+            if (containerToVideoSet[instanceId]) {
+                updateNavigation(instanceId);
+            }
         }
 
         function setupDragHandlers(instanceId) {
@@ -809,10 +1008,84 @@
             button.textContent = instance.rgbVideo.paused ? 'Play' : 'Pause';
         }
 
+        // Generic video switching function
+        function switchVideo(containerId, direction) {
+            const videoSetKey = containerToVideoSet[containerId];
+            if (!videoSetKey || !videoSets[videoSetKey]) return;
+            
+            const currentIndex = currentVideoIndexes[containerId];
+            const newIndex = currentIndex + direction;
+            
+            if (newIndex < 0 || newIndex >= videoSets[videoSetKey].length) {
+                return;
+            }
+            
+            currentVideoIndexes[containerId] = newIndex;
+            
+            const rgbVideo = document.getElementById(`rgbVideo${containerId}`);
+            const depthVideo = document.getElementById(`depthVideo${containerId}`);
+            
+            if (!rgbVideo || !depthVideo) {
+                console.error(`Video elements not found for container ${containerId}`);
+                return;
+            }
+            
+            // Pause current videos
+            rgbVideo.pause();
+            depthVideo.pause();
+            
+            // Update video sources
+            rgbVideo.src = videoSets[videoSetKey][newIndex].rgb;
+            depthVideo.src = videoSets[videoSetKey][newIndex].depth;
+            
+            // Restart videos
+            rgbVideo.load();
+            depthVideo.load();
+            
+            // Update navigation display
+            updateNavigation(containerId);
+            
+            // Reset divider position to center
+            updateDividerPosition(containerId, 50);
+            
+            // Update play button state
+            updatePlayButton(containerId);
+        }
+
+        function updateNavigation(containerId) {
+            const videoSetKey = containerToVideoSet[containerId];
+            if (!videoSetKey || !videoSets[videoSetKey]) return;
+            
+            const currentIndex = currentVideoIndexes[containerId];
+            const videoInfo = document.getElementById(`videoInfo${containerId}`);
+            const prevBtn = document.getElementById(`prevBtn${containerId}`);
+            const nextBtn = document.getElementById(`nextBtn${containerId}`);
+            
+            if (videoInfo) {
+                videoInfo.textContent = `${videoSets[videoSetKey][currentIndex].title} (${currentIndex + 1} of ${videoSets[videoSetKey].length})`;
+            }
+            
+            if (prevBtn) {
+                prevBtn.disabled = currentIndex === 0;
+            }
+            
+            if (nextBtn) {
+                nextBtn.disabled = currentIndex === videoSets[videoSetKey].length - 1;
+            }
+        }
+
+        // Individual switching functions for each container
+        function switchVideo1(direction) { switchVideo(1, direction); }
+        function switchVideo2(direction) { switchVideo(2, direction); }
+        function switchVideo3(direction) { switchVideo(3, direction); }
+        function switchVideo4(direction) { switchVideo(4, direction); }
+        function switchVideo5(direction) { switchVideo(5, direction); }
+        function switchVideo6(direction) { switchVideo(6, direction); }
+
         // Initialize when page loads
         window.addEventListener('load', () => {
             // Initialize references for existing instances
-            for (let i = 1; i <= 2; i++) {
+            for (let i = 1; i <= 7; i++) {
                 if (document.getElementById(`rgbVideo${i}`)) {
                     if (!videoComparisons[i]) {
                         videoComparisons[i] = {
