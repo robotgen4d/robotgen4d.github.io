@@ -1545,7 +1545,30 @@
 		.\-1u\28xsmall\29 {
 			margin-left: 8.33333%;
 		}
+	}
 
+	.tldr-section {
+		background: #f8f9fa;
+		border: 2px solid #e9ecef;
+		border-radius: 8px;
+		padding: 20px;
+		margin: 2em 0;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	}
+
+	.tldr-title {
+		color: #495057;
+		font-weight: bold;
+		font-size: 1.1em;
+		margin-bottom: 10px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.tldr-content {
+		color: #333;
+		font-size: 1.05em;
+		line-height: 1.6;
 	}
 
 /* Basic */
