@@ -559,73 +559,75 @@ body.is-loading *, body.is-loading *:before, body.is-loading *:after {
 
 /* Baseline and Policy Grids */
 .baseline-grid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 30px;
-	margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin: 30px 0;
 }
 
 .baseline-item {
-	background: white;
-	border-radius: 16px;
-	overflow: hidden;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-	transition: all 0.3s ease;
-	border: 1px solid #e1e8ed;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e1e8ed;
 }
 
 .baseline-item:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
 }
 
 .baseline-item video {
-	width: 100%;
-	height: 200px;
-	object-fit: cover;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .baseline-item .caption {
-	padding: 10px;
-	text-align: center;
-	font-weight: 500;
-	color: #2c3e50;
-	background: linear-gradient(135deg, #f8f9ff, #ffffff);
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #f8f9ff, #ffffff);
 }
 
+/* Policy Grid (updated to match) */
 .policy-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-	gap: 30px;
-	margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Changed from auto-fit */
+    gap: 30px;
+    margin: 30px 0;
 }
 
 .policy-item {
-	background: white;
-	border-radius: 16px;
-	overflow: hidden;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-	transition: all 0.3s ease;
-	border: 1px solid #e1e8ed;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e1e8ed;
 }
 
 .policy-item:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
 }
 
 .policy-item video {
-	width: 100%;
-	height: 250px;
-	object-fit: cover;
+    width: 100%;
+    height: 200px; /* Changed from 250px to match baseline */
+    object-fit: cover;
 }
 
 .policy-caption {
-	padding: 10px;
-	text-align: center;
-	font-weight: 500;
-	color: #2c3e50;
-	line-height: 1.5;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: #2c3e50;
+    line-height: 1.5;
+    background: linear-gradient(135deg, #f8f9ff, #ffffff); /* Added to match baseline */
 }
 
 .failure-text {
